@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import { reducer, StateProvider } from "./state";
@@ -6,6 +5,7 @@ import { reducer, StateProvider } from "./state";
 ReactDOM.render(
   <StateProvider reducer={reducer}>
     <App />
-  </StateProvider>,
+  </StateProvider>
+  ,
   document.getElementById('root')
 );
