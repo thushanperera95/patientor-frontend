@@ -8,6 +8,7 @@ import { Patient } from "../types";
 import MaleIcon from '@mui/icons-material/Male';
 import FemaleIcon from '@mui/icons-material/Female';
 import TransgenderIcon from '@mui/icons-material/Transgender';
+import EntryDetails from "./EntryDetails";
 
 const PatientPage = () => {
   const id = useParams<{id: string}>().id;
@@ -32,7 +33,7 @@ const PatientPage = () => {
     void fetchPatient();
   }, [id]);
 
-  if (!patient) {
+  if (!patient || patient.id !== id) {
     return null;
   }
 
@@ -47,6 +48,16 @@ const PatientPage = () => {
       {patient.occupation && <p>Occupation: {patient.occupation}</p>}
       {patient.dateOfBirth && <p>DOB: {patient.dateOfBirth}</p>}
       {patient.ssn && <p>SSN: {patient.ssn}</p>}
+      {patient.entries?.length > 0 && 
+        <div>
+        <Typography variant="h6" style={{ marginTop: "1em", marginBottom: "1em" }}>
+          entries
+        </Typography>
+        {patient.entries.map(entry => 
+          <EntryDetails key={entry.id} entry={entry} />
+        )}
+        </div>
+      }
     </div>
   );
 };
