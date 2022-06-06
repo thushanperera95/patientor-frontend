@@ -10,14 +10,14 @@ import { Box, Card } from "@material-ui/core";
 
 const DiagnosesDetails: React.FC<{diagnosisCodes: string[]}> = ({diagnosisCodes}) => {
   const [{diagnoses}] = useStateValue();
-  if (Array.of(diagnoses).length === 0) {
+  if (!diagnoses || Array.of(diagnoses).length === 0 || diagnosisCodes.length === 0) {
     return null;
   }
 
   return (
     <ul>
       {diagnosisCodes.map(code => 
-        <li key={code}>{code} {diagnoses[code].name}</li>
+        <li key={code}>{code} {diagnoses[code]?.name}</li>
       )}
     </ul> 
   );
